@@ -18,6 +18,8 @@
   <modules>
     <!-- 认证服务 -->
     <module>common-auth</module>
+    <!-- 平台基础框架 -->
+    <module>framework</module>
   </modules>
 
   <properties>
