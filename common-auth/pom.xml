@@ -36,6 +36,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.zh</groupId>
+            <artifactId>framework-common</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

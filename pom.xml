@@ -78,6 +78,13 @@
         <version>${lombok.version}</version>
       </dependency>
 
+      <!--基础公共依赖-->
+      <dependency>
+        <groupId>io.github.zh</groupId>
+        <artifactId>framework-common</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
