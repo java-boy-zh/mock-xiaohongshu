@@ -19,6 +19,8 @@
     <modules>
         <!-- 通用工具组件 -->
         <module>framework-common</module>
+        <!-- 接口日志组件 -->
+        <module>framework-starter-biz-log</module>
     </modules>
 
     <properties>
