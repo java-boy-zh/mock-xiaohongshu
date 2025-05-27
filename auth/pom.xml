@@ -13,7 +13,7 @@
     <artifactId>auth</artifactId>
 
     <name>${project.artifactId}</name>
-    <description>小哈书：认证服务（负责处理用户登录、注册、账号注销等）</description>
+    <description>认证服务（负责处理用户登录、注册、账号注销等）</description>
 
     <!-- 指定打包方式 -->
     <packaging>jar</packaging>
@@ -35,6 +35,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <!-- Mybatis -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- MySQL 驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
         <dependency>
