@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class UserDO {
-
     private Long id;
 
     private String username;
