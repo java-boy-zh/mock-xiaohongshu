@@ -65,6 +65,12 @@
             <groupId>io.github.zh</groupId>
             <artifactId>framework-starter-biz-log</artifactId>
         </dependency>
+
+        <!-- 序列化组件 -->
+        <dependency>
+            <groupId>io.github.zh</groupId>
+            <artifactId>framework-starter-jackson</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

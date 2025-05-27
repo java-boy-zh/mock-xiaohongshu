@@ -1,4 +1,4 @@
-package io.github.zh.auth.config;
+package io.github.zh.jackson.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,14 +14,13 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.YearMonthSerializer;
 import io.github.zh.common.constants.DateConstants;
 import io.github.zh.common.util.JsonUtils;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
 import java.util.TimeZone;
 
 /**
@@ -30,8 +29,8 @@ import java.util.TimeZone;
  * @author 王青玄
  * @version v0.1 2025-05-27 16:49
  */
-@Configuration
-public class JacksonConfig {
+@AutoConfiguration
+public class JacksonAutoConfiguration {
 
     @Bean
     public ObjectMapper objectMapper() {

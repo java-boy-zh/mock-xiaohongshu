@@ -130,6 +130,13 @@
         <version>${revision}</version>
       </dependency>
 
+      <!-- 序列化组件 -->
+      <dependency>
+        <groupId>io.github.zh</groupId>
+        <artifactId>framework-starter-jackson</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
