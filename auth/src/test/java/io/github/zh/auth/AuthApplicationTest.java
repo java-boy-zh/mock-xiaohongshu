@@ -1,5 +1,7 @@
 package io.github.zh.auth;
 
+import io.github.zh.auth.domain.dataobject.UserDO;
+import io.github.zh.auth.mapper.UserDOMapper;
 import io.github.zh.common.util.JsonUtils;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
