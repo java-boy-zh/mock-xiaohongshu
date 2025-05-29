@@ -25,7 +25,7 @@ public class TestController {
     public String doLogin(String username, String password) {
         // 此处仅作模拟示例，真实项目需要从数据库中查询数据进行比对
         if("zhang".equals(username) && "123456".equals(password)) {
-            StpUtil.login(10001);
+            StpUtil.login(10001,"zhang");
             return "登录成功";
         }
         return "登录失败";
