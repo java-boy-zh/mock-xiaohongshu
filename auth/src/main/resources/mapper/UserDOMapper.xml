@@ -220,4 +220,10 @@
       is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+<!-- ==================================拓展查询======================================================= -->
+  <select id="selectByPhone" resultMap="BaseResultMap">
+    select id, password from t_user where phone = #{phone}
+  </select>
+
 </mapper>
