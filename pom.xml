@@ -37,13 +37,20 @@
     <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
 
     <!-- 依赖包版本 -->
+    <!-- 简化配置 -->
     <lombok.version>1.18.30</lombok.version>
+    <!-- springboot 版本 -->
     <spring-boot.version>3.0.2</spring-boot.version>
+    <!-- springcloud 版本 -->
     <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
     <spring-cloud.version>2022.0.0</spring-cloud.version>
+    <!-- 序列化版本 -->
     <jackson.version>2.16.1</jackson.version>
+    <!-- 数据库 版本-->
     <mysql-connector-java.version>8.0.29</mysql-connector-java.version>
     <druid.version>1.2.21</druid.version>
+    <!-- 权限认证版本 -->
+    <sa-token.version>1.38.0</sa-token.version>
   </properties>
 
   <!-- 统一依赖管理 -->
@@ -74,6 +81,13 @@
         <version>${spring-cloud.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+
+      <!-- Sa-Token 权限认证 -->
+      <dependency>
+        <groupId>cn.dev33</groupId>
+        <artifactId>sa-token-spring-boot3-starter</artifactId>
+        <version>${sa-token.version}</version>
       </dependency>
 
       <!-- 避免编写那些冗余的 Java 样板式代码，如 get、set 等 -->
