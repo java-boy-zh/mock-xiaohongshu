@@ -174,4 +174,10 @@
       is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+    <!--=================================自定义功能实现==============================-->
+  <select id="selectAppEnabledList" resultMap="BaseResultMap">
+    select id, name, permission_key from t_permission
+    where status = 0 and type = 3 and is_deleted = 0
+  </select>
 </mapper>

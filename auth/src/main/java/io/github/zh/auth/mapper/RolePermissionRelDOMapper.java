@@ -1,6 +1,9 @@
 package io.github.zh.auth.mapper;
 
 import io.github.zh.auth.domain.dataobject.RolePermissionRelDO;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface RolePermissionRelDOMapper {
     int deleteByPrimaryKey(Long id);
@@ -14,4 +17,12 @@ public interface RolePermissionRelDOMapper {
     int updateByPrimaryKeySelective(RolePermissionRelDO record);
 
     int updateByPrimaryKey(RolePermissionRelDO record);
+
+    /**
+     * 根据角色 ID 集合批量查询
+     *
+     * @param roleIds
+     * @return
+     */
+    List<RolePermissionRelDO> selectByRoleIds(@Param("roleIds") List<Long> roleIds);
 }
