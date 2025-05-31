@@ -50,7 +50,7 @@
     <jackson.version>2.16.1</jackson.version>
     <!-- 数据库 版本-->
     <mysql-connector-java.version>8.0.29</mysql-connector-java.version>
-    <druid.version>1.2.21</druid.version>
+    <druid.version>1.2.23</druid.version>
     <!-- 权限认证版本 -->
     <sa-token.version>1.38.0</sa-token.version>
     <!-- 工具版本 -->
