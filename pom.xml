@@ -37,6 +37,8 @@
     <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
 
     <!-- 依赖包版本 -->
+    <!--nacos-->
+    <nacos-config.version>0.3.0-RC</nacos-config.version>
     <!-- 简化配置 -->
     <lombok.version>1.18.30</lombok.version>
     <!-- springboot 版本 -->
@@ -85,6 +87,13 @@
         <version>${spring-cloud.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+
+      <!-- Nacos 配置中心 -->
+      <dependency>
+        <groupId>com.alibaba.boot</groupId>
+        <artifactId>nacos-config-spring-boot-starter</artifactId>
+        <version>${nacos-config.version}</version>
       </dependency>
 
       <!-- Sa-Token 权限认证 -->

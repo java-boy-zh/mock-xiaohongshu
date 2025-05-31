@@ -1,0 +1,2 @@
+alarm:
+  type: sms # 告警类型
