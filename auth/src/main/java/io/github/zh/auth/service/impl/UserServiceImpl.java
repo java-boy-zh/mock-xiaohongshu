@@ -2,6 +2,7 @@ package io.github.zh.auth.service.impl;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import io.github.zh.auth.constant.RedisKeyConstants;
 import io.github.zh.auth.constant.RoleConstants;
@@ -66,9 +67,7 @@ public class UserServiceImpl implements UserService {
                 String verificationCode = userLoginReqVO.getCode();
 
                 // 校验入参验证码是否为空
-                if (StringUtils.isBlank(verificationCode)) {
-                    return Response.fail(ResponseCodeEnum.PARAM_NOT_VALID.getErrorCode(), "验证码不能为空");
-                }
+                Preconditions.checkArgument(StringUtils.isNotBlank(verificationCode), "验证码不能为空");
 
                 // 构建验证码 Redis Key
                 String key = RedisKeyConstants.buildVerificationCodeKey(phone);
