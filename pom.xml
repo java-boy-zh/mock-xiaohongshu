@@ -20,6 +20,7 @@
     <module>auth</module>
     <!-- 平台基础框架 -->
     <module>framework</module>
+    <module>gateway</module>
   </modules>
 
   <properties>
