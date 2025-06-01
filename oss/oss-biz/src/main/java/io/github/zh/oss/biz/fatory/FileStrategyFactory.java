@@ -5,6 +5,7 @@ import io.github.zh.oss.biz.strategy.FileStrategy;
 import io.github.zh.oss.biz.strategy.impl.AliyunOSSFileStrategy;
 import io.github.zh.oss.biz.strategy.impl.MinioFileStrategy;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,12 +15,14 @@ import org.springframework.context.annotation.Configuration;
  * @create 2025年06月01日 17:53
  */
 @Configuration
+@RefreshScope
 public class FileStrategyFactory {
 
     @Value("${storage.type}")
     private String strategyType;
 
     @Bean
+    @RefreshScope
     public FileStrategy getFileStrategy() {
 
         FileStorageType fileStorageType = FileStorageType.fromCode(strategyType);
