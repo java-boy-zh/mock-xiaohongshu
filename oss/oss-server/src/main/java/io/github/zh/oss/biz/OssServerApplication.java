@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @create 2025年06月01日 17:29
  */
 @SpringBootApplication
-public class OssApplication {
+public class OssServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(OssApplication.class, args);
+        SpringApplication.run(OssServerApplication.class, args);
     }
 
 }

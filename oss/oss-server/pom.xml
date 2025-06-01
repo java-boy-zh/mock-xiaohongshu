@@ -9,7 +9,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>oss-biz</artifactId>
+    <artifactId>oss-server</artifactId>
     <name>${project.artifactId}</name>
     <description>对象存储业务层</description>
 

@@ -24,7 +24,7 @@
         <!-- OSS Api层 -->
         <module>oss-api</module>
         <!-- OSS 业务层 -->
-        <module>oss-biz</module>
+        <module>oss-server</module>
     </modules>
 
     <dependencies>
