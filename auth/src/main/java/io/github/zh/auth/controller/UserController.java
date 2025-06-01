@@ -1,5 +1,6 @@
 package io.github.zh.auth.controller;
 
+import io.github.zh.auth.domain.vo.user.UpdatePasswordReqVO;
 import io.github.zh.auth.domain.vo.user.UserLoginReqVO;
 import io.github.zh.auth.service.UserService;
 import io.github.zh.common.resopnse.Response;
@@ -34,5 +35,11 @@ public class UserController {
     public Response<?> logout() {
 
         return userService.logout();
+    }
+
+    @PostMapping("/password/update")
+    @ApiOperationLog(description = "修改密码")
+    public Response<?> updatePassword(@Validated @RequestBody UpdatePasswordReqVO updatePasswordReqVO) {
+        return userService.updatePassword(updatePasswordReqVO);
     }
 }
