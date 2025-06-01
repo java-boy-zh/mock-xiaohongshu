@@ -24,6 +24,8 @@
     <module>gateway</module>
     <!-- 对象存储服务 -->
     <module>oss</module>
+    <!-- 用户中心服务 -->
+    <module>usercenter</module>
   </modules>
 
   <properties>
