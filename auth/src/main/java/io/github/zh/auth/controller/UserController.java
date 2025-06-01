@@ -35,6 +35,6 @@ public class UserController {
 
         log.info("==> 网关透传过来的用户 ID: {}", userId);
 
-        return Response.success();
+        return userService.logout(Long.valueOf(userId));
     }
 }
