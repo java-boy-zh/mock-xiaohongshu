@@ -143,7 +143,7 @@ DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `xiaohongshu_id` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '小红书号(唯一凭证)',
-  `wechat_open_id` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '微信唯一ID',
+  `wechat_open_id` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '微信唯一ID',
   `password` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '密码',
   `nickname` varchar(24) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '昵称',
   `avatar` varchar(120) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '头像',
