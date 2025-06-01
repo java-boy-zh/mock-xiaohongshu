@@ -20,7 +20,10 @@
     <module>auth</module>
     <!-- 平台基础框架 -->
     <module>framework</module>
+    <!-- 网关服务 -->
     <module>gateway</module>
+    <!-- 对象存储服务 -->
+    <module>oss</module>
   </modules>
 
   <properties>
