@@ -3,7 +3,6 @@ package io.github.zh.auth.service.impl;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
 import io.github.zh.auth.constant.RedisKeyConstants;
 import io.github.zh.auth.constant.RoleConstants;
 import io.github.zh.auth.domain.dataobject.RoleDO;
@@ -13,7 +12,6 @@ import io.github.zh.auth.domain.vo.user.UpdatePasswordReqVO;
 import io.github.zh.auth.domain.vo.user.UserLoginReqVO;
 import io.github.zh.auth.enums.LoginTypeEnum;
 import io.github.zh.auth.enums.ResponseCodeEnum;
-import io.github.zh.auth.filter.LoginUserContextHolder;
 import io.github.zh.auth.mapper.RoleDOMapper;
 import io.github.zh.auth.mapper.UserDOMapper;
 import io.github.zh.auth.mapper.UserRoleRelDOMapper;
@@ -23,6 +21,7 @@ import io.github.zh.common.eumns.StatusEnum;
 import io.github.zh.common.exception.BizException;
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.common.util.JsonUtils;
+import io.github.zh.context.holder.LoginUserContextHolder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -189,7 +188,7 @@ public class UserServiceImpl implements UserService {
                 redisTemplate.opsForValue().set(userRolesKey, JsonUtils.toJsonString(roles));
 
                 return userId;
-            }catch (Exception e){
+            } catch (Exception e) {
                 status.setRollbackOnly(); // 标记事务为回滚
                 log.error("==> 系统注册用户异常: ", e);
                 return null;
