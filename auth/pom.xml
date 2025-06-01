@@ -90,6 +90,12 @@
             <artifactId>framework-starter-jackson</artifactId>
         </dependency>
 
+        <!-- 全局传递组件 -->
+        <dependency>
+            <groupId>io.github.zh</groupId>
+            <artifactId>framework-starter-context</artifactId>
+        </dependency>
+
         <!-- Sa-Token 权限认证 -->
         <dependency>
             <groupId>cn.dev33</groupId>
@@ -112,11 +118,6 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>transmittable-thread-local</artifactId>
         </dependency>
 
     </dependencies>

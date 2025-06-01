@@ -207,6 +207,13 @@
         <version>${revision}</version>
       </dependency>
 
+      <!-- 全局传递组件 -->
+      <dependency>
+        <groupId>io.github.zh</groupId>
+        <artifactId>framework-starter-context</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 

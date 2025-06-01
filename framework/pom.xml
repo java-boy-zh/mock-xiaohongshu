@@ -23,6 +23,7 @@
         <module>framework-starter-biz-log</module>
         <!-- jackson组件 -->
         <module>framework-starter-jackson</module>
+        <module>framework-starter-context</module>
     </modules>
 
     <properties>
