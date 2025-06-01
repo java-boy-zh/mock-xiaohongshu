@@ -128,12 +128,12 @@ public class UserServiceImpl implements UserService {
         return transactionTemplate.execute(status -> {
             try {
                 // 获取全局自增的小红书 ID
-                Long xiaohashuId = redisTemplate.opsForValue().increment(RedisKeyConstants.XIAOHONGSHU_ID_GENERATOR_KEY);
+                Long xiaohongshuId = redisTemplate.opsForValue().increment(RedisKeyConstants.XIAOHONGSHU_ID_GENERATOR_KEY);
 
                 UserDO userDO = UserDO.builder()
                         .phone(phone)
-                        .xiaohongshuId(String.valueOf(xiaohashuId)) // 自动生成小红书号 ID
-                        .nickname("小红薯" + xiaohashuId) // 自动生成昵称, 如：小红薯10000
+                        .xiaohongshuId(String.valueOf(xiaohongshuId)) // 自动生成小红书号 ID
+                        .nickname("小红薯" + xiaohongshuId) // 自动生成昵称, 如：小红薯10000
                         .status(StatusEnum.ENABLE.getValue().byteValue()) // 状态为启用
                         .createTime(LocalDateTime.now())
                         .updateTime(LocalDateTime.now())
@@ -157,7 +157,8 @@ public class UserServiceImpl implements UserService {
                 userRoleRelDOMapper.insert(userRoleDO);
 
                 RoleDO roleDO = roleDOMapper.selectByPrimaryKey(RoleConstants.COMMON_USER_ROLE_ID);
-                // 将该用户的角色 ID 存入 Redis 中，指定初始容量为 1，这样可以减少在扩容时的性能开销
+
+                // 将该用户的角色 ID 存入 Redis 中
                 List<String> roles = new ArrayList<>(1);
                 roles.add(roleDO.getRoleKey());
 

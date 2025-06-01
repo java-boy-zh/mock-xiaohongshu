@@ -28,8 +28,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StpInterfaceImpl implements StpInterface {
 
-    private RedisTemplate<String, String> redisTemplate;
-    private ObjectMapper objectMapper;
+    private final RedisTemplate<String, String> redisTemplate;
+    private final ObjectMapper objectMapper;
 
     @SneakyThrows
     @Override
