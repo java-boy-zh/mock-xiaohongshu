@@ -1,2 +1,2 @@
 storage:
-  type: aliyun # 对象存储类型
+  type: aliyun # 对象存储类型 aliyun/minio
