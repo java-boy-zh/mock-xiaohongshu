@@ -56,7 +56,24 @@
             <artifactId>commons-pool2</artifactId>
         </dependency>
 
+        <!-- Redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
 
+        <!-- Jackson 组件 -->
+        <dependency>
+            <groupId>io.github.zh</groupId>
+            <artifactId>framework-starter-jackson</artifactId>
+        </dependency>
+
+
+        <!--基础公共依赖-->
+        <dependency>
+            <groupId>io.github.zh</groupId>
+            <artifactId>framework-common</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
