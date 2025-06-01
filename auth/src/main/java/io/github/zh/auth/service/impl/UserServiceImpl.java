@@ -12,6 +12,7 @@ import io.github.zh.auth.domain.dataobject.UserRoleRelDO;
 import io.github.zh.auth.domain.vo.user.UserLoginReqVO;
 import io.github.zh.auth.enums.LoginTypeEnum;
 import io.github.zh.auth.enums.ResponseCodeEnum;
+import io.github.zh.auth.filter.LoginUserContextHolder;
 import io.github.zh.auth.mapper.RoleDOMapper;
 import io.github.zh.auth.mapper.UserDOMapper;
 import io.github.zh.auth.mapper.UserRoleRelDOMapper;
@@ -177,11 +178,14 @@ public class UserServiceImpl implements UserService {
     /**
      * 退出登录
      *
-     * @param userId
      * @return
      */
     @Override
-    public Response<?> logout(Long userId) {
+    public Response<?> logout() {
+        Long userId = LoginUserContextHolder.getUserId();
+
+        log.info("==> 用户退出登录, userId: {}", userId);
+
         // 退出登录 (指定用户 ID)
         StpUtil.logout(userId);
 

@@ -31,10 +31,8 @@ public class UserController {
 
     @PostMapping("/logout")
     @ApiOperationLog(description = "账号登出")
-    public Response<?> logout(@RequestHeader("userId") String userId) {
+    public Response<?> logout() {
 
-        log.info("==> 网关透传过来的用户 ID: {}", userId);
-
-        return userService.logout(Long.valueOf(userId));
+        return userService.logout();
     }
 }
