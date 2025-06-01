@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @create 2025年05月31日 21:28
  */
 @SpringBootApplication
-public class XiaohongshuGatewayApplication {
+public class GatewayApplication {
     public static void main(String[] args) {
-        SpringApplication.run(XiaohongshuGatewayApplication.class, args);
+        SpringApplication.run(GatewayApplication.class, args);
     }
 }

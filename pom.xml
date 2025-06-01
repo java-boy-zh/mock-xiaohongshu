@@ -111,6 +111,13 @@
         <version>${sa-token.version}</version>
       </dependency>
 
+      <!--  Sa-Token 整合 Gateway -->
+      <dependency>
+        <groupId>cn.dev33</groupId>
+        <artifactId>sa-token-reactor-spring-boot3-starter</artifactId>
+        <version>${sa-token.version}</version>
+      </dependency>
+
       <!-- 避免编写那些冗余的 Java 样板式代码，如 get、set 等 -->
       <dependency>
         <groupId>org.projectlombok</groupId>
