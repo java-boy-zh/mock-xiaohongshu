@@ -8,20 +8,13 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <groupId>io.github.zh</groupId>
-  <artifactId>framework</artifactId>
+  <artifactId>oss</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
-  <description>平台基础设施层：封装一些常用功能，供各个业务线拿来即用</description>
+  <description>对象存储服务</description>
   <modules>
-    <module>framework-common</module>
-    <module>framework-starter-biz-log</module>
-    <module>framework-starter-jackson</module>
-    <module>framework-starter-context</module>
+    <module>oss-api</module>
+    <module>oss-biz</module>
   </modules>
-  <properties>
-    <maven.compiler.target>17</maven.compiler.target>
-    <maven.compiler.source>17</maven.compiler.source>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
 </project>
