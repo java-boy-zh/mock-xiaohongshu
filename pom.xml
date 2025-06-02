@@ -257,6 +257,13 @@
         <version>${revision}</version>
       </dependency>
 
+      <!-- Feign OSS 调用组件 -->
+      <dependency>
+        <groupId>io.github.zh</groupId>
+        <artifactId>oss-api</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 

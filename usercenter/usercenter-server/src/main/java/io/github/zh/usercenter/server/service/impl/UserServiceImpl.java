@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.common.util.ParamUtils;
 import io.github.zh.context.holder.LoginUserContextHolder;
+import io.github.zh.oss.api.client.FileFeignApi;
 import io.github.zh.usercenter.server.domain.dataobject.UserDO;
 import io.github.zh.usercenter.server.domain.vo.user.UpdateUserInfoReqVO;
 import io.github.zh.usercenter.server.enums.ResponseCodeEnum;
@@ -32,6 +33,7 @@ import java.util.Objects;
 public class UserServiceImpl implements UserService {
 
     private final UserDOMapper userDOMapper;
+    private final FileFeignApi fileFeignApi;
 
     /**
      * 更新用户信息
@@ -52,6 +54,7 @@ public class UserServiceImpl implements UserService {
 
         if (Objects.nonNull(avatarFile)) {
             // todo: 调用对象存储服务上传文件
+            fileFeignApi.test();
         }
 
         // 昵称
