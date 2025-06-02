@@ -1,1 +1,2 @@
 io.github.zh.context.config.ContextAutoConfiguration
+io.github.zh.context.config.FeignContextAutoConfiguration
