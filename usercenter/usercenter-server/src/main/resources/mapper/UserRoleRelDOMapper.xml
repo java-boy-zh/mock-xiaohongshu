@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.github.zh.auth.mapper.UserRoleRelDOMapper">
-  <resultMap id="BaseResultMap" type="io.github.zh.auth.domain.dataobject.UserRoleRelDO">
+<mapper namespace="io.github.zh.usercenter.server.mapper.UserRoleRelDOMapper">
+  <resultMap id="BaseResultMap" type="io.github.zh.usercenter.server.domain.dataobject.UserRoleRelDO">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="role_id" jdbcType="BIGINT" property="roleId" />
@@ -22,7 +22,7 @@
     delete from t_user_role_rel
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="io.github.zh.auth.domain.dataobject.UserRoleRelDO">
+  <insert id="insert" parameterType="io.github.zh.usercenter.server.domain.dataobject.UserRoleRelDO">
     insert into t_user_role_rel (id, user_id, role_id, 
       create_time, update_time, is_deleted
       )
@@ -30,7 +30,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="io.github.zh.auth.domain.dataobject.UserRoleRelDO">
+  <insert id="insertSelective" parameterType="io.github.zh.usercenter.server.domain.dataobject.UserRoleRelDO">
     insert into t_user_role_rel
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="io.github.zh.auth.domain.dataobject.UserRoleRelDO">
+  <update id="updateByPrimaryKeySelective" parameterType="io.github.zh.usercenter.server.domain.dataobject.UserRoleRelDO">
     update t_user_role_rel
     <set>
       <if test="userId != null">
@@ -94,7 +94,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="io.github.zh.auth.domain.dataobject.UserRoleRelDO">
+  <update id="updateByPrimaryKey" parameterType="io.github.zh.usercenter.server.domain.dataobject.UserRoleRelDO">
     update t_user_role_rel
     set user_id = #{userId,jdbcType=BIGINT},
       role_id = #{roleId,jdbcType=BIGINT},

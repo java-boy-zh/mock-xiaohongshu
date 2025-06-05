@@ -1,4 +1,4 @@
-package io.github.zh.auth.domain.dataobject;
+package io.github.zh.usercenter.server.domain.dataobject;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

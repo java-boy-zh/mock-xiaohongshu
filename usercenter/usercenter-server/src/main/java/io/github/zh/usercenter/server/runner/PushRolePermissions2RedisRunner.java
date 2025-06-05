@@ -1,16 +1,16 @@
-package io.github.zh.auth.runner;
+package io.github.zh.usercenter.server.runner;
 
 import cn.hutool.core.collection.CollUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import io.github.zh.auth.constant.RedisKeyConstants;
-import io.github.zh.auth.domain.dataobject.PermissionDO;
-import io.github.zh.auth.domain.dataobject.RoleDO;
-import io.github.zh.auth.domain.dataobject.RolePermissionRelDO;
-import io.github.zh.auth.mapper.PermissionDOMapper;
-import io.github.zh.auth.mapper.RoleDOMapper;
-import io.github.zh.auth.mapper.RolePermissionRelDOMapper;
 import io.github.zh.common.util.JsonUtils;
+import io.github.zh.usercenter.server.constant.RedisKeyConstants;
+import io.github.zh.usercenter.server.domain.dataobject.PermissionDO;
+import io.github.zh.usercenter.server.domain.dataobject.RoleDO;
+import io.github.zh.usercenter.server.domain.dataobject.RolePermissionRelDO;
+import io.github.zh.usercenter.server.mapper.PermissionDOMapper;
+import io.github.zh.usercenter.server.mapper.RoleDOMapper;
+import io.github.zh.usercenter.server.mapper.RolePermissionRelDOMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;

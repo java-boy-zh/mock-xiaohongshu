@@ -1,6 +1,6 @@
-package io.github.zh.auth.mapper;
+package io.github.zh.usercenter.server.mapper;
 
-import io.github.zh.auth.domain.dataobject.RolePermissionRelDO;
+import io.github.zh.usercenter.server.domain.dataobject.RolePermissionRelDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

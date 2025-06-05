@@ -33,9 +33,9 @@ public class UserDO {
 
     private String email;
 
-    private Integer sex;
+    private Byte sex;
 
-    private Integer status;
+    private Byte status;
 
     private String introduction;
 
@@ -44,4 +44,5 @@ public class UserDO {
     private LocalDateTime updateTime;
 
     private Boolean isDeleted;
+
 }

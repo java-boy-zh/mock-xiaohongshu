@@ -33,14 +33,15 @@
     delete from t_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="io.github.zh.usercenter.server.domain.dataobject.UserDO">
-    insert into t_user (id, xiaohongshu_id, wechat_open_id, 
+  <insert id="insert" parameterType="io.github.zh.usercenter.server.domain.dataobject.UserDO"
+          useGeneratedKeys="true" keyProperty="id">
+    insert into t_user (xiaohongshu_id, wechat_open_id,
       `password`, nickname, avatar, 
       birthday, background_img, phone, 
       email, sex, `status`, 
       introduction, create_time, update_time, 
       is_deleted)
-    values (#{id,jdbcType=BIGINT}, #{xiaohongshuId,jdbcType=VARCHAR}, #{wechatOpenId,jdbcType=VARCHAR}, 
+    values (#{xiaohongshuId,jdbcType=VARCHAR}, #{wechatOpenId,jdbcType=VARCHAR},
       #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
       #{birthday,jdbcType=DATE}, #{backgroundImg,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
@@ -220,4 +221,10 @@
       is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+<!-- ==================================拓展查询======================================================= -->
+  <select id="selectByPhone" resultMap="BaseResultMap">
+    select id, password from t_user where phone = #{phone}
+  </select>
+
 </mapper>

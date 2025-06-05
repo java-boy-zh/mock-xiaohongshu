@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
         Integer sex = updateUserInfoReqVO.getSex();
         if (Objects.nonNull(sex)) {
             Preconditions.checkArgument(SexEnum.isValid(sex), ResponseCodeEnum.SEX_VALID_FAIL.getErrorMessage());
-            userDO.setSex(sex);
+            userDO.setSex(sex.byteValue());
             needUpdate = true;
         }
 

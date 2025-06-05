@@ -1,4 +1,4 @@
-package io.github.zh.auth.domain.dataobject;
+package io.github.zh.usercenter.server.domain.dataobject;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,18 +11,24 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RoleDO {
+public class PermissionDO {
     private Long id;
 
-    private String roleName;
+    private Long parentId;
 
-    private String roleKey;
+    private String name;
 
-    private Byte status;
+    private Byte type;
+
+    private String menuUrl;
+
+    private String menuIcon;
 
     private Integer sort;
 
-    private String remark;
+    private String permissionKey;
+
+    private Byte status;
 
     private Date createTime;
 

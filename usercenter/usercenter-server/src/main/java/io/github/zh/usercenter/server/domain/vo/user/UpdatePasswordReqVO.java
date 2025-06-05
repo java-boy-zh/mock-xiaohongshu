@@ -1,4 +1,4 @@
-package io.github.zh.auth.domain.vo.user;
+package io.github.zh.usercenter.server.domain.vo.user;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

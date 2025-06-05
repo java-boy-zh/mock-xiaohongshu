@@ -1,6 +1,7 @@
-package io.github.zh.auth.mapper;
+package io.github.zh.usercenter.server.mapper;
 
-import io.github.zh.auth.domain.dataobject.UserRoleRelDO;
+
+import io.github.zh.usercenter.server.domain.dataobject.UserRoleRelDO;
 
 public interface UserRoleRelDOMapper {
     int deleteByPrimaryKey(Long id);

@@ -1,4 +1,4 @@
-package io.github.zh.auth.domain.vo.verificationcode;
+package io.github.zh.usercenter.server.domain.vo.verificationcode;
 
 import io.github.zh.common.validator.PhoneNumber;
 import jakarta.validation.constraints.NotBlank;
