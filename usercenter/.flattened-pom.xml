@@ -8,13 +8,16 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <groupId>io.github.zh</groupId>
-  <artifactId>oss</artifactId>
+  <artifactId>usercenter</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
-  <description>对象存储服务</description>
+  <description>用户服务</description>
   <modules>
-    <module>oss-api</module>
-    <module>oss-server</module>
+    <module>usercenter-api</module>
+    <module>usercenter-server</module>
   </modules>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 </project>

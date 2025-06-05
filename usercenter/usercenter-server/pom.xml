@@ -102,6 +102,12 @@
             <artifactId>commons-pool2</artifactId>
         </dependency>
 
+        <!-- 用户中心API -->
+        <dependency>
+            <groupId>io.github.zh</groupId>
+            <artifactId>usercenter-api</artifactId>
+        </dependency>
+
     </dependencies>
 
 

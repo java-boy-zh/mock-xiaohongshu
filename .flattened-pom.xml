@@ -13,9 +13,11 @@
     <module>framework</module>
     <module>gateway</module>
     <module>oss</module>
+    <module>usercenter</module>
   </modules>
   <properties>
     <minio.version>8.2.1</minio.version>
+    <feign-form.version>3.8.0</feign-form.version>
     <hutool.version>5.8.26</hutool.version>
     <mysql-connector-java.version>8.0.29</mysql-connector-java.version>
     <jackson.version>2.16.1</jackson.version>
@@ -161,6 +163,11 @@
         <version>${jaxb-runtime.version}</version>
       </dependency>
       <dependency>
+        <groupId>io.github.openfeign.form</groupId>
+        <artifactId>feign-form</artifactId>
+        <version>${feign-form.version}</version>
+      </dependency>
+      <dependency>
         <groupId>io.github.zh</groupId>
         <artifactId>framework-common</artifactId>
         <version>0.0.1-SNAPSHOT</version>
@@ -178,6 +185,16 @@
       <dependency>
         <groupId>io.github.zh</groupId>
         <artifactId>framework-starter-context</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>io.github.zh</groupId>
+        <artifactId>usercenter-api</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>io.github.zh</groupId>
+        <artifactId>oss-api</artifactId>
         <version>0.0.1-SNAPSHOT</version>
       </dependency>
     </dependencies>

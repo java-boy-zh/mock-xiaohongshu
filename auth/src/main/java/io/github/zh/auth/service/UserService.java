@@ -1,6 +1,5 @@
 package io.github.zh.auth.service;
 
-import io.github.zh.auth.domain.vo.user.UpdatePasswordReqVO;
 import io.github.zh.auth.domain.vo.user.UserLoginReqVO;
 import io.github.zh.common.resopnse.Response;
 
@@ -14,6 +13,7 @@ public interface UserService {
 
     /**
      * 登录与注册
+     *
      * @param userLoginReqVO
      * @return
      */
@@ -21,14 +21,9 @@ public interface UserService {
 
     /**
      * 退出登录
+     *
      * @return
      */
     Response<?> logout();
 
-    /**
-     * 修改密码
-     * @param updatePasswordReqVO
-     * @return
-     */
-    Response<?> updatePassword(UpdatePasswordReqVO updatePasswordReqVO);
 }

@@ -4,23 +4,14 @@ import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.google.common.base.Preconditions;
 import io.github.zh.auth.constant.RedisKeyConstants;
-import io.github.zh.auth.constant.RoleConstants;
-import io.github.zh.auth.domain.dataobject.RoleDO;
-import io.github.zh.auth.domain.dataobject.UserDO;
-import io.github.zh.auth.domain.dataobject.UserRoleRelDO;
 import io.github.zh.auth.domain.vo.user.UpdatePasswordReqVO;
 import io.github.zh.auth.domain.vo.user.UserLoginReqVO;
 import io.github.zh.auth.enums.LoginTypeEnum;
 import io.github.zh.auth.enums.ResponseCodeEnum;
-import io.github.zh.auth.mapper.RoleDOMapper;
-import io.github.zh.auth.mapper.UserDOMapper;
-import io.github.zh.auth.mapper.UserRoleRelDOMapper;
+import io.github.zh.auth.rpc.UserRpcService;
 import io.github.zh.auth.service.UserService;
-import io.github.zh.common.eumns.DeletedEnum;
-import io.github.zh.common.eumns.StatusEnum;
 import io.github.zh.common.exception.BizException;
 import io.github.zh.common.resopnse.Response;
-import io.github.zh.common.util.JsonUtils;
 import io.github.zh.context.holder.LoginUserContextHolder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,8 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -46,12 +35,10 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserDOMapper userDOMapper;
-    private final RoleDOMapper roleDOMapper;
     private final RedisTemplate<String, Object> redisTemplate;
-    private final UserRoleRelDOMapper userRoleRelDOMapper;
     private final TransactionTemplate transactionTemplate;
     private final PasswordEncoder passwordEncoder;
+    private final UserRpcService userRpcService;
 
     /**
      * 登录与注册
@@ -86,42 +73,15 @@ public class UserServiceImpl implements UserService {
                     throw new BizException(ResponseCodeEnum.VERIFICATION_CODE_ERROR);
                 }
 
-                // 通过手机号查询记录
-                UserDO userDO = userDOMapper.selectByPhone(phone);
+                // RPC: 调用用户服务，注册用户
+                Long userIdTmp = userRpcService.registerUser(phone);
 
-                log.info("==> 用户是否注册, phone: {}, userDO: {}", phone, JsonUtils.toJsonString(userDO));
-
-                // 判断是否注册
-                if (Objects.isNull(userDO)) {
-                    // 若此用户还没有注册，系统自动注册该用户
-                    userId = registerUser(phone);
-                } else {
-                    // 已注册，则获取其用户 ID
-                    userId = userDO.getId();
-                }
-                break;
-            case PASSWORD: // 密码登录
-                String password = userLoginReqVO.getPassword();
-                // 根据手机号查询
-                UserDO userDO1 = userDOMapper.selectByPhone(phone);
-
-                // 判断该手机号是否注册
-                if (Objects.isNull(userDO1)) {
-                    throw new BizException(ResponseCodeEnum.USER_NOT_FOUND);
+                // 若调用用户服务，返回的用户 ID 为空，则提示登录失败
+                if (Objects.isNull(userIdTmp)) {
+                    throw new BizException(ResponseCodeEnum.LOGIN_FAIL);
                 }
 
-                // 拿到密文密码
-                String encodePassword = userDO1.getPassword();
-
-                // 匹配密码是否一致
-                boolean isPasswordCorrect = passwordEncoder.matches(password, encodePassword);
-
-                // 如果不正确，则抛出业务异常，提示用户名或者密码不正确
-                if (!isPasswordCorrect) {
-                    throw new BizException(ResponseCodeEnum.PHONE_OR_PASSWORD_ERROR);
-                }
-
-                userId = userDO1.getId();
+                userId = userIdTmp;
                 break;
             default:
                 break;
@@ -139,64 +99,6 @@ public class UserServiceImpl implements UserService {
 
 
     /**
-     * 系统自动注册用户
-     *
-     * @param phone
-     * @return
-     */
-    public Long registerUser(String phone) {
-
-        /*编程式事务控制回滚*/
-        return transactionTemplate.execute(status -> {
-            try {
-                // 获取全局自增的小红书 ID
-                Long xiaohongshuId = redisTemplate.opsForValue().increment(RedisKeyConstants.XIAOHONGSHU_ID_GENERATOR_KEY);
-
-                UserDO userDO = UserDO.builder()
-                        .phone(phone)
-                        .xiaohongshuId(String.valueOf(xiaohongshuId)) // 自动生成小红书号 ID
-                        .nickname("小红薯" + xiaohongshuId) // 自动生成昵称, 如：小红薯10000
-                        .status(StatusEnum.ENABLE.getValue().byteValue()) // 状态为启用
-                        .createTime(LocalDateTime.now())
-                        .updateTime(LocalDateTime.now())
-                        .isDeleted(DeletedEnum.NO.getValue()) // 逻辑删除
-                        .build();
-
-                // 添加入库
-                userDOMapper.insert(userDO);
-
-                // 获取刚刚添加入库的用户 ID
-                Long userId = userDO.getId();
-
-                // 给该用户分配一个默认角色
-                UserRoleRelDO userRoleDO = UserRoleRelDO.builder()
-                        .userId(userId)
-                        .roleId(RoleConstants.COMMON_USER_ROLE_ID)
-                        .createTime(LocalDateTime.now())
-                        .updateTime(LocalDateTime.now())
-                        .isDeleted(DeletedEnum.NO.getValue())
-                        .build();
-                userRoleRelDOMapper.insert(userRoleDO);
-
-                RoleDO roleDO = roleDOMapper.selectByPrimaryKey(RoleConstants.COMMON_USER_ROLE_ID);
-
-                // 将该用户的角色 ID 存入 Redis 中
-                List<String> roles = new ArrayList<>(1);
-                roles.add(roleDO.getRoleKey());
-
-                String userRolesKey = RedisKeyConstants.buildUserRoleKey(userId);
-                redisTemplate.opsForValue().set(userRolesKey, JsonUtils.toJsonString(roles));
-
-                return userId;
-            } catch (Exception e) {
-                status.setRollbackOnly(); // 标记事务为回滚
-                log.error("==> 系统注册用户异常: ", e);
-                return null;
-            }
-        });
-    }
-
-    /**
      * 退出登录
      *
      * @return
@@ -209,33 +111,6 @@ public class UserServiceImpl implements UserService {
 
         // 退出登录 (指定用户 ID)
         StpUtil.logout(userId);
-
-        return Response.success();
-    }
-
-    /**
-     * 修改密码
-     *
-     * @param updatePasswordReqVO
-     * @return
-     */
-    @Override
-    public Response<?> updatePassword(UpdatePasswordReqVO updatePasswordReqVO) {
-        // 新密码
-        String newPassword = updatePasswordReqVO.getNewPassword();
-        // 密码加密
-        String encodePassword = passwordEncoder.encode(newPassword);
-
-        // 获取当前请求对应的用户 ID
-        Long userId = LoginUserContextHolder.getUserId();
-
-        UserDO userDO = UserDO.builder()
-                .id(userId)
-                .password(encodePassword)
-                .updateTime(LocalDateTime.now())
-                .build();
-        // 更新密码
-        userDOMapper.updateByPrimaryKeySelective(userDO);
 
         return Response.success();
     }

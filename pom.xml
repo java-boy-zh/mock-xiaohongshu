@@ -266,6 +266,13 @@
         <version>${revision}</version>
       </dependency>
 
+      <!-- 用户中心API -->
+      <dependency>
+        <groupId>io.github.zh</groupId>
+        <artifactId>usercenter-api</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
       <!-- Feign OSS 调用组件 -->
       <dependency>
         <groupId>io.github.zh</groupId>
