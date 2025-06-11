@@ -2,6 +2,7 @@ package io.github.zh.usercenter.server.service;
 
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.usercenter.api.dto.req.RegisterUserReqDTO;
+import io.github.zh.usercenter.api.dto.req.UpdateUserPasswordReqDTO;
 import io.github.zh.usercenter.server.domain.vo.user.UpdateUserInfoReqVO;
 
 /**
@@ -27,4 +28,12 @@ public interface UserService {
      * @return
      */
     Response<Long> register(RegisterUserReqDTO registerUserReqDTO);
+
+    /**
+     * 更新密码
+     *
+     * @param updateUserPasswordReqDTO
+     * @return
+     */
+    Response<?> updatePassword(UpdateUserPasswordReqDTO updateUserPasswordReqDTO);
 }

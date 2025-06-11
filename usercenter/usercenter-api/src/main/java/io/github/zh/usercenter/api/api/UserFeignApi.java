@@ -3,6 +3,7 @@ package io.github.zh.usercenter.api.api;
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.usercenter.api.constant.ApiConstants;
 import io.github.zh.usercenter.api.dto.req.RegisterUserReqDTO;
+import io.github.zh.usercenter.api.dto.req.UpdateUserPasswordReqDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,5 +27,14 @@ public interface UserFeignApi {
      */
     @PostMapping(value = PREFIX + "/register")
     Response<Long> registerUser(@RequestBody RegisterUserReqDTO registerUserReqDTO);
+
+    /**
+     * 更新密码
+     *
+     * @param updateUserPasswordReqDTO
+     * @return
+     */
+    @PostMapping(value = PREFIX + "/password/update")
+    Response<?> updatePassword(@RequestBody UpdateUserPasswordReqDTO updateUserPasswordReqDTO);
 
 }

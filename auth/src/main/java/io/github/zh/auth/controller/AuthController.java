@@ -1,7 +1,8 @@
 package io.github.zh.auth.controller;
 
+import io.github.zh.auth.domain.vo.user.UpdatePasswordReqVO;
 import io.github.zh.auth.domain.vo.user.UserLoginReqVO;
-import io.github.zh.auth.service.UserService;
+import io.github.zh.auth.service.AuthService;
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.log.aspect.ApiOperationLog;
 import jakarta.annotation.Resource;
@@ -21,21 +22,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 @Slf4j
-public class UserController {
+public class AuthController {
 
     @Resource
-    private UserService userService;
+    private AuthService authService;
 
     @PostMapping("/login")
     @ApiOperationLog(description = "用户登录/注册")
     public Response<String> loginAndRegister(@Validated @RequestBody UserLoginReqVO userLoginReqVO) {
-        return userService.loginAndRegister(userLoginReqVO);
+        return authService.loginAndRegister(userLoginReqVO);
     }
 
     @PostMapping("/logout")
     @ApiOperationLog(description = "账号登出")
     public Response<?> logout() {
 
-        return userService.logout();
+        return authService.logout();
+    }
+
+    @PostMapping("/password/update")
+    @ApiOperationLog(description = "修改密码")
+    public Response<?> updatePassword(@Validated @RequestBody UpdatePasswordReqVO updatePasswordReqVO) {
+        return authService.updatePassword(updatePasswordReqVO);
     }
 }

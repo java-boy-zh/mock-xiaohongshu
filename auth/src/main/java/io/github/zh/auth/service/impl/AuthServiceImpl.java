@@ -9,7 +9,7 @@ import io.github.zh.auth.domain.vo.user.UserLoginReqVO;
 import io.github.zh.auth.enums.LoginTypeEnum;
 import io.github.zh.auth.enums.ResponseCodeEnum;
 import io.github.zh.auth.rpc.UserRpcService;
-import io.github.zh.auth.service.UserService;
+import io.github.zh.auth.service.AuthService;
 import io.github.zh.common.exception.BizException;
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.context.holder.LoginUserContextHolder;
@@ -21,7 +21,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -33,7 +32,7 @@ import java.util.Objects;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class AuthServiceImpl implements AuthService {
 
     private final RedisTemplate<String, Object> redisTemplate;
     private final TransactionTemplate transactionTemplate;
@@ -111,6 +110,25 @@ public class UserServiceImpl implements UserService {
 
         // 退出登录 (指定用户 ID)
         StpUtil.logout(userId);
+
+        return Response.success();
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param updatePasswordReqVO
+     * @return
+     */
+    @Override
+    public Response<?> updatePassword(UpdatePasswordReqVO updatePasswordReqVO) {
+        // 新密码
+        String newPassword = updatePasswordReqVO.getNewPassword();
+        // 密码加密
+        String encodePassword = passwordEncoder.encode(newPassword);
+
+        // RPC: 调用用户服务：更新密码
+        userRpcService.updatePassword(encodePassword);
 
         return Response.success();
     }

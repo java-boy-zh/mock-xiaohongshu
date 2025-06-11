@@ -3,6 +3,7 @@ package io.github.zh.auth.rpc;
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.usercenter.api.api.UserFeignApi;
 import io.github.zh.usercenter.api.dto.req.RegisterUserReqDTO;
+import io.github.zh.usercenter.api.dto.req.UpdateUserPasswordReqDTO;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +37,18 @@ public class UserRpcService {
         }
 
         return response.getData();
+    }
+
+    /**
+     * 密码更新
+     *
+     * @param encodePassword
+     */
+    public void updatePassword(String encodePassword) {
+        UpdateUserPasswordReqDTO updateUserPasswordReqDTO = new UpdateUserPasswordReqDTO();
+        updateUserPasswordReqDTO.setEncodePassword(encodePassword);
+
+        userFeignApi.updatePassword(updateUserPasswordReqDTO);
     }
 
 }

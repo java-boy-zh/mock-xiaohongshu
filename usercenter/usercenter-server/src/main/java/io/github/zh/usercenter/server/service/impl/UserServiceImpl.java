@@ -10,6 +10,7 @@ import io.github.zh.common.util.ParamUtils;
 import io.github.zh.context.holder.LoginUserContextHolder;
 import io.github.zh.oss.api.client.FileFeignApi;
 import io.github.zh.usercenter.api.dto.req.RegisterUserReqDTO;
+import io.github.zh.usercenter.api.dto.req.UpdateUserPasswordReqDTO;
 import io.github.zh.usercenter.server.constant.RedisKeyConstants;
 import io.github.zh.usercenter.server.constant.RoleConstants;
 import io.github.zh.usercenter.server.domain.dataobject.RoleDO;
@@ -212,5 +213,27 @@ public class UserServiceImpl implements UserService {
         redisTemplate.opsForValue().set(userRolesKey, JsonUtils.toJsonString(roles));
 
         return Response.success(userId);
+    }
+
+    /**
+     * 更新密码
+     *
+     * @param updateUserPasswordReqDTO
+     * @return
+     */
+    @Override
+    public Response<?> updatePassword(UpdateUserPasswordReqDTO updateUserPasswordReqDTO) {
+        // 获取当前请求对应的用户 ID
+        Long userId = LoginUserContextHolder.getUserId();
+
+        UserDO userDO = UserDO.builder()
+                .id(userId)
+                .password(updateUserPasswordReqDTO.getEncodePassword()) // 加密后的密码
+                .updateTime(LocalDateTime.now())
+                .build();
+        // 更新密码
+        userDOMapper.updateByPrimaryKeySelective(userDO);
+
+        return Response.success();
     }
 }
