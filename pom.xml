@@ -26,6 +26,8 @@
     <module>oss</module>
     <!-- 用户中心服务 -->
     <module>usercenter</module>
+    <!-- KV 键值存储服务 -->
+      <module>xiaohongshu-kv</module>
   </modules>
 
   <properties>
