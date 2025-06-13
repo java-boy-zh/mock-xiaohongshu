@@ -2,6 +2,8 @@ package io.github.zh.kv.server.service;
 
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.kv.api.dto.req.AddNoteContentReqDTO;
+import io.github.zh.kv.api.dto.req.FindNoteContentReqDTO;
+import io.github.zh.kv.api.dto.rsp.FindNoteContentRspDTO;
 
 /**
  * NoteContentService
@@ -18,4 +20,13 @@ public interface NoteContentService {
      * @return
      */
     Response<?> addNoteContent(AddNoteContentReqDTO addNoteContentReqDTO);
+
+    /**
+     * 查询笔记内容
+     *
+     * @param findNoteContentReqDTO
+     * @return
+     */
+    Response<FindNoteContentRspDTO> findNoteContent(FindNoteContentReqDTO findNoteContentReqDTO);
+
 }

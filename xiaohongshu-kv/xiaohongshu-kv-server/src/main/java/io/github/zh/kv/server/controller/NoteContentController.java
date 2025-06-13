@@ -2,6 +2,8 @@ package io.github.zh.kv.server.controller;
 
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.kv.api.dto.req.AddNoteContentReqDTO;
+import io.github.zh.kv.api.dto.req.FindNoteContentReqDTO;
+import io.github.zh.kv.api.dto.rsp.FindNoteContentRspDTO;
 import io.github.zh.kv.server.service.NoteContentService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +31,11 @@ public class NoteContentController {
     @PostMapping(value = "/note/content/add")
     public Response<?> addNoteContent(@Validated @RequestBody AddNoteContentReqDTO addNoteContentReqDTO) {
         return noteContentService.addNoteContent(addNoteContentReqDTO);
+    }
+
+    @PostMapping(value = "/note/content/find")
+    public Response<FindNoteContentRspDTO> findNoteContent(@Validated @RequestBody FindNoteContentReqDTO findNoteContentReqDTO) {
+        return noteContentService.findNoteContent(findNoteContentReqDTO);
     }
 
 }
