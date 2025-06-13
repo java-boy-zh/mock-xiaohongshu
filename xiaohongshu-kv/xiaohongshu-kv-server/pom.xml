@@ -52,5 +52,10 @@
             <artifactId>spring-boot-starter-data-cassandra</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>io.github.zh</groupId>
+            <artifactId>xiaohongshu-kv-api</artifactId>
+        </dependency>
+
     </dependencies>
 </project>
