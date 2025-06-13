@@ -27,7 +27,9 @@
     <!-- 用户中心服务 -->
     <module>usercenter</module>
     <!-- KV 键值存储服务 -->
-      <module>xiaohongshu-kv</module>
+    <module>xiaohongshu-kv</module>
+    <!-- 分布式 ID 生成服务 -->
+    <module>xiaohongshu-distributed-id</module>
   </modules>
 
   <properties>
