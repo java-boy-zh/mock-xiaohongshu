@@ -3,6 +3,7 @@ package io.github.zh.kv.server.service.impl;
 import io.github.zh.common.exception.BizException;
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.kv.api.dto.req.AddNoteContentReqDTO;
+import io.github.zh.kv.api.dto.req.DeleteNoteContentReqDTO;
 import io.github.zh.kv.api.dto.req.FindNoteContentReqDTO;
 import io.github.zh.kv.api.dto.rsp.FindNoteContentRspDTO;
 import io.github.zh.kv.server.domain.dataobject.NoteContentDO;
@@ -76,5 +77,21 @@ public class NoteContentServiceImpl implements NoteContentService {
                 .build();
 
         return Response.success(findNoteContentRspDTO);
+    }
+
+    /**
+     * 删除笔记内容
+     *
+     * @param deleteNoteContentReqDTO
+     * @return
+     */
+    @Override
+    public Response<?> deleteNoteContent(DeleteNoteContentReqDTO deleteNoteContentReqDTO) {
+        // 笔记 ID
+        String noteId = deleteNoteContentReqDTO.getNoteId();
+        // 删除笔记内容
+        noteContentMapper.deleteById(UUID.fromString(noteId));
+
+        return Response.success();
     }
 }

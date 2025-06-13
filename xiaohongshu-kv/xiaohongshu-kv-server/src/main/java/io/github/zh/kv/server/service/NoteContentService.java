@@ -2,6 +2,7 @@ package io.github.zh.kv.server.service;
 
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.kv.api.dto.req.AddNoteContentReqDTO;
+import io.github.zh.kv.api.dto.req.DeleteNoteContentReqDTO;
 import io.github.zh.kv.api.dto.req.FindNoteContentReqDTO;
 import io.github.zh.kv.api.dto.rsp.FindNoteContentRspDTO;
 
@@ -28,5 +29,13 @@ public interface NoteContentService {
      * @return
      */
     Response<FindNoteContentRspDTO> findNoteContent(FindNoteContentReqDTO findNoteContentReqDTO);
+
+    /**
+     * 删除笔记内容
+     *
+     * @param deleteNoteContentReqDTO
+     * @return
+     */
+    Response<?> deleteNoteContent(DeleteNoteContentReqDTO deleteNoteContentReqDTO);
 
 }

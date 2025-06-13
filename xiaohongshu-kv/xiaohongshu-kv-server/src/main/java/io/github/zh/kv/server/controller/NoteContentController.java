@@ -2,6 +2,7 @@ package io.github.zh.kv.server.controller;
 
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.kv.api.dto.req.AddNoteContentReqDTO;
+import io.github.zh.kv.api.dto.req.DeleteNoteContentReqDTO;
 import io.github.zh.kv.api.dto.req.FindNoteContentReqDTO;
 import io.github.zh.kv.api.dto.rsp.FindNoteContentRspDTO;
 import io.github.zh.kv.server.service.NoteContentService;
@@ -36,6 +37,11 @@ public class NoteContentController {
     @PostMapping(value = "/note/content/find")
     public Response<FindNoteContentRspDTO> findNoteContent(@Validated @RequestBody FindNoteContentReqDTO findNoteContentReqDTO) {
         return noteContentService.findNoteContent(findNoteContentReqDTO);
+    }
+
+    @PostMapping(value = "/note/content/delete")
+    public Response<?> deleteNoteContent(@Validated @RequestBody DeleteNoteContentReqDTO deleteNoteContentReqDTO) {
+        return noteContentService.deleteNoteContent(deleteNoteContentReqDTO);
     }
 
 }
