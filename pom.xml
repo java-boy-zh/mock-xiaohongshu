@@ -291,6 +291,14 @@
         <version>${revision}</version>
       </dependency>
 
+      <!-- ID分发 调用组件 -->
+      <dependency>
+        <groupId>io.github.zh</groupId>
+        <artifactId>xiaohongshu-distributed-id-api</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
+
     </dependencies>
   </dependencyManagement>
 

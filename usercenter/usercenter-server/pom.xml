@@ -108,6 +108,13 @@
             <artifactId>usercenter-api</artifactId>
         </dependency>
 
+
+        <!-- ID分发 调用组件 -->
+        <dependency>
+            <groupId>io.github.zh</groupId>
+            <artifactId>xiaohongshu-distributed-id-api</artifactId>
+        </dependency>
+
     </dependencies>
 
 
