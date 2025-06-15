@@ -14,4 +14,7 @@ public interface TopicDOMapper {
     int updateByPrimaryKeySelective(TopicDO record);
 
     int updateByPrimaryKey(TopicDO record);
+
+    String selectNameByPrimaryKey(Long id);
+
 }
