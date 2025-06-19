@@ -1,8 +1,10 @@
 package io.github.zh.usercenter.server.service;
 
 import io.github.zh.common.resopnse.Response;
+import io.github.zh.usercenter.api.dto.req.FindUserByIdReqDTO;
 import io.github.zh.usercenter.api.dto.req.RegisterUserReqDTO;
 import io.github.zh.usercenter.api.dto.req.UpdateUserPasswordReqDTO;
+import io.github.zh.usercenter.api.dto.resp.FindUserByIdRspDTO;
 import io.github.zh.usercenter.server.domain.vo.user.UpdateUserInfoReqVO;
 
 /**
@@ -36,4 +38,12 @@ public interface UserService {
      * @return
      */
     Response<?> updatePassword(UpdateUserPasswordReqDTO updateUserPasswordReqDTO);
+
+    /**
+     * 根据用户 ID 查询用户信息
+     *
+     * @param findUserByIdReqDTO
+     * @return
+     */
+    Response<FindUserByIdRspDTO> findById(FindUserByIdReqDTO findUserByIdReqDTO);
 }

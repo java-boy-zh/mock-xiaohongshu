@@ -9,8 +9,10 @@ import io.github.zh.common.util.JsonUtils;
 import io.github.zh.common.util.ParamUtils;
 import io.github.zh.context.holder.LoginUserContextHolder;
 import io.github.zh.oss.api.client.FileFeignApi;
+import io.github.zh.usercenter.api.dto.req.FindUserByIdReqDTO;
 import io.github.zh.usercenter.api.dto.req.RegisterUserReqDTO;
 import io.github.zh.usercenter.api.dto.req.UpdateUserPasswordReqDTO;
+import io.github.zh.usercenter.api.dto.resp.FindUserByIdRspDTO;
 import io.github.zh.usercenter.server.constant.RedisKeyConstants;
 import io.github.zh.usercenter.server.constant.RoleConstants;
 import io.github.zh.usercenter.server.domain.dataobject.RoleDO;
@@ -239,5 +241,33 @@ public class UserServiceImpl implements UserService {
         userDOMapper.updateByPrimaryKeySelective(userDO);
 
         return Response.success();
+    }
+
+    /**
+     * 根据用户 ID 查询用户信息
+     *
+     * @param findUserByIdReqDTO
+     * @return
+     */
+    @Override
+    public Response<FindUserByIdRspDTO> findById(FindUserByIdReqDTO findUserByIdReqDTO) {
+        Long userId = findUserByIdReqDTO.getId();
+
+        // 根据用户 ID 查询用户信息
+        UserDO userDO = userDOMapper.selectByPrimaryKey(userId);
+
+        // 判空
+        if (Objects.isNull(userDO)) {
+            throw new BizException(ResponseCodeEnum.USER_NOT_FOUND);
+        }
+
+        // 构建返参
+        FindUserByIdRspDTO findUserByIdRspDTO = FindUserByIdRspDTO.builder()
+                .id(userDO.getId())
+                .nickName(userDO.getNickname())
+                .avatar(userDO.getAvatar())
+                .build();
+
+        return Response.success(findUserByIdRspDTO);
     }
 }

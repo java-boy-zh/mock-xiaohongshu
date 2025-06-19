@@ -2,8 +2,10 @@ package io.github.zh.usercenter.server.controller;
 
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.log.aspect.ApiOperationLog;
+import io.github.zh.usercenter.api.dto.req.FindUserByIdReqDTO;
 import io.github.zh.usercenter.api.dto.req.RegisterUserReqDTO;
 import io.github.zh.usercenter.api.dto.req.UpdateUserPasswordReqDTO;
+import io.github.zh.usercenter.api.dto.resp.FindUserByIdRspDTO;
 import io.github.zh.usercenter.server.domain.vo.user.UpdateUserInfoReqVO;
 import io.github.zh.usercenter.server.service.UserService;
 import jakarta.annotation.Resource;
@@ -50,6 +52,12 @@ public class UserController {
     @ApiOperationLog(description = "密码更新")
     public Response<?> updatePassword(@Validated @RequestBody UpdateUserPasswordReqDTO updateUserPasswordReqDTO) {
         return userService.updatePassword(updateUserPasswordReqDTO);
+    }
+
+    @PostMapping("/findById")
+    @ApiOperationLog(description = "查询用户信息")
+    public Response<FindUserByIdRspDTO> findById(@Validated @RequestBody FindUserByIdReqDTO findUserByIdReqDTO) {
+        return userService.findById(findUserByIdReqDTO);
     }
 
 }
