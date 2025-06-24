@@ -1,10 +1,7 @@
 package io.github.zh.note.server.service;
 
 import io.github.zh.common.resopnse.Response;
-import io.github.zh.note.server.domain.vo.req.DeleteNoteReqVO;
-import io.github.zh.note.server.domain.vo.req.FindNoteDetailReqVO;
-import io.github.zh.note.server.domain.vo.req.PublishNoteReqVO;
-import io.github.zh.note.server.domain.vo.req.UpdateNoteReqVO;
+import io.github.zh.note.server.domain.vo.req.*;
 import io.github.zh.note.server.domain.vo.resp.FindNoteDetailRspVO;
 
 /**
@@ -48,5 +45,12 @@ public interface NoteService {
      * @return
      */
     Response<?> deleteNote(DeleteNoteReqVO deleteNoteReqVO);
+
+    /**
+     * 笔记仅对自己可见
+     * @param updateNoteVisibleOnlyMeReqVO
+     * @return
+     */
+    Response<?> visibleOnlyMe(UpdateNoteVisibleOnlyMeReqVO updateNoteVisibleOnlyMeReqVO);
 
 }

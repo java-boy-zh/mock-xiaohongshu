@@ -2,10 +2,7 @@ package io.github.zh.note.server.controller;
 
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.log.aspect.ApiOperationLog;
-import io.github.zh.note.server.domain.vo.req.DeleteNoteReqVO;
-import io.github.zh.note.server.domain.vo.req.FindNoteDetailReqVO;
-import io.github.zh.note.server.domain.vo.req.PublishNoteReqVO;
-import io.github.zh.note.server.domain.vo.req.UpdateNoteReqVO;
+import io.github.zh.note.server.domain.vo.req.*;
 import io.github.zh.note.server.domain.vo.resp.FindNoteDetailRspVO;
 import io.github.zh.note.server.service.NoteService;
 import jakarta.annotation.Resource;
@@ -52,6 +49,12 @@ public class NoteController {
     @ApiOperationLog(description = "删除笔记")
     public Response<?> deleteNote(@Validated @RequestBody DeleteNoteReqVO deleteNoteReqVO) {
         return noteService.deleteNote(deleteNoteReqVO);
+    }
+
+    @PostMapping(value = "/visible/onlyme")
+    @ApiOperationLog(description = "笔记仅对自己可见")
+    public Response<?> visibleOnlyMe(@Validated @RequestBody UpdateNoteVisibleOnlyMeReqVO updateNoteVisibleOnlyMeReqVO) {
+        return noteService.visibleOnlyMe(updateNoteVisibleOnlyMeReqVO);
     }
 
 }
