@@ -4,6 +4,7 @@ import io.github.zh.common.resopnse.Response;
 import io.github.zh.log.aspect.ApiOperationLog;
 import io.github.zh.note.server.domain.vo.req.FindNoteDetailReqVO;
 import io.github.zh.note.server.domain.vo.req.PublishNoteReqVO;
+import io.github.zh.note.server.domain.vo.req.UpdateNoteReqVO;
 import io.github.zh.note.server.domain.vo.resp.FindNoteDetailRspVO;
 import io.github.zh.note.server.service.NoteService;
 import jakarta.annotation.Resource;

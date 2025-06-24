@@ -81,6 +81,8 @@
     <feign-form.version>3.8.0</feign-form.version>
     <!-- 二级缓存 -->
     <caffeine.version>3.1.8</caffeine.version>
+    <!-- MQ -->
+    <rocketmq.version>2.2.3</rocketmq.version>
   </properties>
 
   <!-- 统一依赖管理 -->
@@ -250,6 +252,13 @@
         <groupId>com.github.ben-manes.caffeine</groupId>
         <artifactId>caffeine</artifactId>
         <version>${caffeine.version}</version>
+      </dependency>
+
+      <!-- Rocket MQ -->
+      <dependency>
+        <groupId>org.apache.rocketmq</groupId>
+        <artifactId>rocketmq-spring-boot-starter</artifactId>
+        <version>${rocketmq.version}</version>
       </dependency>
 
       <!--基础公共依赖-->
