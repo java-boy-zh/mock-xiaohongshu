@@ -3,6 +3,7 @@ package io.github.zh.note.server.service;
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.note.server.domain.vo.req.FindNoteDetailReqVO;
 import io.github.zh.note.server.domain.vo.req.PublishNoteReqVO;
+import io.github.zh.note.server.domain.vo.req.UpdateNoteReqVO;
 import io.github.zh.note.server.domain.vo.resp.FindNoteDetailRspVO;
 
 /**
@@ -27,5 +28,11 @@ public interface NoteService {
      */
     Response<FindNoteDetailRspVO> findNoteDetail(FindNoteDetailReqVO findNoteDetailReqVO);
 
+    /**
+     * 笔记更新
+     * @param updateNoteReqVO
+     * @return
+     */
+    Response<?> updateNote(UpdateNoteReqVO updateNoteReqVO);
 
 }
