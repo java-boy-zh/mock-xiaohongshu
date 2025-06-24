@@ -1,6 +1,7 @@
 package io.github.zh.note.server.service;
 
 import io.github.zh.common.resopnse.Response;
+import io.github.zh.note.server.domain.vo.req.DeleteNoteReqVO;
 import io.github.zh.note.server.domain.vo.req.FindNoteDetailReqVO;
 import io.github.zh.note.server.domain.vo.req.PublishNoteReqVO;
 import io.github.zh.note.server.domain.vo.req.UpdateNoteReqVO;
@@ -40,5 +41,12 @@ public interface NoteService {
      * @param noteId
      */
     void deleteNoteLocalCache(Long noteId);
+
+    /**
+     * 删除笔记
+     * @param deleteNoteReqVO
+     * @return
+     */
+    Response<?> deleteNote(DeleteNoteReqVO deleteNoteReqVO);
 
 }

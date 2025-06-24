@@ -2,6 +2,7 @@ package io.github.zh.note.server.controller;
 
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.log.aspect.ApiOperationLog;
+import io.github.zh.note.server.domain.vo.req.DeleteNoteReqVO;
 import io.github.zh.note.server.domain.vo.req.FindNoteDetailReqVO;
 import io.github.zh.note.server.domain.vo.req.PublishNoteReqVO;
 import io.github.zh.note.server.domain.vo.req.UpdateNoteReqVO;
@@ -45,6 +46,12 @@ public class NoteController {
     @ApiOperationLog(description = "笔记修改")
     public Response<?> updateNote(@Validated @RequestBody UpdateNoteReqVO updateNoteReqVO) {
         return noteService.updateNote(updateNoteReqVO);
+    }
+
+    @PostMapping(value = "/delete")
+    @ApiOperationLog(description = "删除笔记")
+    public Response<?> deleteNote(@Validated @RequestBody DeleteNoteReqVO deleteNoteReqVO) {
+        return noteService.deleteNote(deleteNoteReqVO);
     }
 
 }
