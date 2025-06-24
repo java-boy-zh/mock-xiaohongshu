@@ -40,4 +40,10 @@ public class NoteController {
         return noteService.findNoteDetail(findNoteDetailReqVO);
     }
 
+    @PostMapping(value = "/update")
+    @ApiOperationLog(description = "笔记修改")
+    public Response<?> updateNote(@Validated @RequestBody UpdateNoteReqVO updateNoteReqVO) {
+        return noteService.updateNote(updateNoteReqVO);
+    }
+
 }
