@@ -1,4 +1,4 @@
-package io.github.zh.note.server.domain.vo;
+package io.github.zh.note.server.domain.vo.req;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

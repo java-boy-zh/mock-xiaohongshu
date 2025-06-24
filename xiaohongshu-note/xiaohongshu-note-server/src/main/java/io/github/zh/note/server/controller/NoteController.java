@@ -2,7 +2,9 @@ package io.github.zh.note.server.controller;
 
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.log.aspect.ApiOperationLog;
-import io.github.zh.note.server.domain.vo.PublishNoteReqVO;
+import io.github.zh.note.server.domain.vo.req.FindNoteDetailReqVO;
+import io.github.zh.note.server.domain.vo.req.PublishNoteReqVO;
+import io.github.zh.note.server.domain.vo.resp.FindNoteDetailRspVO;
 import io.github.zh.note.server.service.NoteService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +32,12 @@ public class NoteController {
     @ApiOperationLog(description = "笔记发布")
     public Response<?> publishNote(@Validated @RequestBody PublishNoteReqVO publishNoteReqVO) {
         return noteService.publishNote(publishNoteReqVO);
+    }
+
+    @PostMapping(value = "/detail")
+    @ApiOperationLog(description = "笔记详情")
+    public Response<FindNoteDetailRspVO> findNoteDetail(@Validated @RequestBody FindNoteDetailReqVO findNoteDetailReqVO) {
+        return noteService.findNoteDetail(findNoteDetailReqVO);
     }
 
 }

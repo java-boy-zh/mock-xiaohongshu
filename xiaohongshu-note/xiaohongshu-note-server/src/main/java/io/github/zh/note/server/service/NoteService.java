@@ -1,7 +1,9 @@
 package io.github.zh.note.server.service;
 
 import io.github.zh.common.resopnse.Response;
-import io.github.zh.note.server.domain.vo.PublishNoteReqVO;
+import io.github.zh.note.server.domain.vo.req.FindNoteDetailReqVO;
+import io.github.zh.note.server.domain.vo.req.PublishNoteReqVO;
+import io.github.zh.note.server.domain.vo.resp.FindNoteDetailRspVO;
 
 /**
  * @author 王青玄
@@ -17,5 +19,13 @@ public interface NoteService {
      * @return
      */
     Response<?> publishNote(PublishNoteReqVO publishNoteReqVO);
+
+    /**
+     * 笔记详情
+     * @param findNoteDetailReqVO
+     * @return
+     */
+    Response<FindNoteDetailRspVO> findNoteDetail(FindNoteDetailReqVO findNoteDetailReqVO);
+
 
 }

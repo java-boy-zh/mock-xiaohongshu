@@ -102,6 +102,11 @@
             <artifactId>xiaohongshu-kv-api</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>io.github.zh</groupId>
+            <artifactId>usercenter-api</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
