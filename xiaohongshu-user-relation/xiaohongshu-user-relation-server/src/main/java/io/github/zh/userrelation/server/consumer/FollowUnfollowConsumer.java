@@ -1,5 +1,6 @@
 package io.github.zh.userrelation.server.consumer;
 
+import com.google.common.util.concurrent.RateLimiter;
 import io.github.zh.common.util.JsonUtils;
 import io.github.zh.userrelation.server.constant.MQConstants;
 import io.github.zh.userrelation.server.domain.dataobject.FansDO;
@@ -39,8 +40,14 @@ public class FollowUnfollowConsumer implements RocketMQListener<Message> {
     @Resource
     private TransactionTemplate transactionTemplate;
 
+    @Resource
+    private RateLimiter rateLimiter;
+
     @Override
     public void onMessage(Message message) {
+        // 流量削峰：通过获取令牌，如果没有令牌可用，将阻塞，直到获得
+        rateLimiter.acquire();
+
         // 消息体
         String bodyJsonStr = new String(message.getBody());
         // 标签
