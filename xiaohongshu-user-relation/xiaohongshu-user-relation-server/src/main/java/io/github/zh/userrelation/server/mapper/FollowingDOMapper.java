@@ -2,6 +2,8 @@ package io.github.zh.userrelation.server.mapper;
 
 import io.github.zh.userrelation.server.domain.dataobject.FollowingDO;
 
+import java.util.List;
+
 public interface FollowingDOMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,6 @@ public interface FollowingDOMapper {
     int updateByPrimaryKeySelective(FollowingDO record);
 
     int updateByPrimaryKey(FollowingDO record);
+
+    List<FollowingDO> selectByUserId(Long userId);
 }
