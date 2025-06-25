@@ -5,10 +5,13 @@ import cn.hutool.core.util.RandomUtil;
 import io.github.zh.common.exception.BizException;
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.common.util.DateUtils;
+import io.github.zh.common.util.JsonUtils;
 import io.github.zh.context.holder.LoginUserContextHolder;
 import io.github.zh.usercenter.api.dto.resp.FindUserByIdRspDTO;
+import io.github.zh.userrelation.server.constant.MQConstants;
 import io.github.zh.userrelation.server.constant.RedisKeyConstants;
 import io.github.zh.userrelation.server.domain.dataobject.FollowingDO;
+import io.github.zh.userrelation.server.domain.dto.FollowUserMqDTO;
 import io.github.zh.userrelation.server.domain.vo.FollowUserReqVO;
 import io.github.zh.userrelation.server.enums.LuaResultEnum;
 import io.github.zh.userrelation.server.enums.ResponseCodeEnum;
@@ -16,10 +19,17 @@ import io.github.zh.userrelation.server.mapper.FollowingDOMapper;
 import io.github.zh.userrelation.server.rpc.UserRpcService;
 import io.github.zh.userrelation.server.service.RelationService;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.client.producer.SendCallback;
+import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.scripting.support.ResourceScriptSource;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -32,6 +42,8 @@ import java.util.Objects;
  * @author 王青玄
  * @version v0.1 2025-06-25 15:33
  */
+@Service
+@Slf4j
 public class RelationServiceImpl implements RelationService {
 
     @Resource
@@ -40,6 +52,8 @@ public class RelationServiceImpl implements RelationService {
     private RedisTemplate<String, Object> redisTemplate;
     @Resource
     private FollowingDOMapper followingDOMapper;
+    @Resource
+    private RocketMQTemplate rocketMQTemplate;
 
     /**
      * 关注用户
@@ -126,6 +140,36 @@ public class RelationServiceImpl implements RelationService {
                 }
             }
         }
+
+        // 发送 MQ
+        // 构建消息体 DTO
+        FollowUserMqDTO followUserMqDTO = FollowUserMqDTO.builder()
+                .userId(userId)
+                .followUserId(followUserId)
+                .createTime(now)
+                .build();
+
+        // 构建消息对象，并将 DTO 转成 Json 字符串设置到消息体中
+        Message<String> message = MessageBuilder.withPayload(JsonUtils.toJsonString(followUserMqDTO))
+                .build();
+
+        // 通过冒号连接, 可让 MQ 发送给主题 Topic 时，携带上标签 Tag
+        String destination = MQConstants.TOPIC_FOLLOW_OR_UNFOLLOW + ":" + MQConstants.TAG_FOLLOW;
+
+        log.info("==> 开始发送关注操作 MQ, 消息体: {}", followUserMqDTO);
+
+        // 异步发送 MQ 消息，提升接口响应速度
+        rocketMQTemplate.asyncSend(destination, message, new SendCallback() {
+            @Override
+            public void onSuccess(SendResult sendResult) {
+                log.info("==> MQ 发送成功，SendResult: {}", sendResult);
+            }
+
+            @Override
+            public void onException(Throwable throwable) {
+                log.error("==> MQ 发送异常: ", throwable);
+            }
+        });
 
         return Response.success();
     }
