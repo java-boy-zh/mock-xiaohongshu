@@ -36,7 +36,7 @@ import java.util.Objects;
  * @description: 关注、取关 MQ 消费者
  */
 @Component
-@RocketMQMessageListener(consumerGroup = "xiaohongshu_group", // Group 组
+@RocketMQMessageListener(consumerGroup = "xiaohashu_group_" + MQConstants.TOPIC_FOLLOW_OR_UNFOLLOW, // Group 组
         topic = MQConstants.TOPIC_FOLLOW_OR_UNFOLLOW, // 消费的 Topic 主题
         consumeMode = ConsumeMode.ORDERLY // 顺序消费者模式
 )
