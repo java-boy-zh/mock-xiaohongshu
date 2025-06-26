@@ -3,6 +3,7 @@ package io.github.zh.usercenter.server.controller;
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.log.aspect.ApiOperationLog;
 import io.github.zh.usercenter.api.dto.req.FindUserByIdReqDTO;
+import io.github.zh.usercenter.api.dto.req.FindUsersByIdsReqDTO;
 import io.github.zh.usercenter.api.dto.req.RegisterUserReqDTO;
 import io.github.zh.usercenter.api.dto.req.UpdateUserPasswordReqDTO;
 import io.github.zh.usercenter.api.dto.resp.FindUserByIdRspDTO;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author 王青玄
@@ -59,5 +62,12 @@ public class UserController {
     public Response<FindUserByIdRspDTO> findById(@Validated @RequestBody FindUserByIdReqDTO findUserByIdReqDTO) {
         return userService.findById(findUserByIdReqDTO);
     }
+
+    @PostMapping("/findByIds")
+    @ApiOperationLog(description = "批量查询用户信息")
+    public Response<List<FindUserByIdRspDTO>> findByIds(@Validated @RequestBody FindUsersByIdsReqDTO findUsersByIdsReqDTO) {
+        return userService.findByIds(findUsersByIdsReqDTO);
+    }
+
 
 }

@@ -3,12 +3,15 @@ package io.github.zh.usercenter.api.api;
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.usercenter.api.constant.ApiConstants;
 import io.github.zh.usercenter.api.dto.req.FindUserByIdReqDTO;
+import io.github.zh.usercenter.api.dto.req.FindUsersByIdsReqDTO;
 import io.github.zh.usercenter.api.dto.req.RegisterUserReqDTO;
 import io.github.zh.usercenter.api.dto.req.UpdateUserPasswordReqDTO;
 import io.github.zh.usercenter.api.dto.resp.FindUserByIdRspDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 /**
  * UserFeignApi
@@ -47,4 +50,12 @@ public interface UserFeignApi {
     @PostMapping(value = PREFIX + "/findById")
     Response<FindUserByIdRspDTO> findById(@RequestBody FindUserByIdReqDTO findUserByIdReqDTO);
 
+    /**
+     * 批量查询用户信息
+     *
+     * @param findUsersByIdsReqDTO
+     * @return
+     */
+    @PostMapping(value = PREFIX + "/findByIds")
+    Response<List<FindUserByIdRspDTO>> findByIds(@RequestBody FindUsersByIdsReqDTO findUsersByIdsReqDTO);
 }
