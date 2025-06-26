@@ -3,10 +3,7 @@ package io.github.zh.userrelation.server.controller;
 import io.github.zh.common.resopnse.PageResponse;
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.log.aspect.ApiOperationLog;
-import io.github.zh.userrelation.server.domain.vo.FindFollowingListReqVO;
-import io.github.zh.userrelation.server.domain.vo.FindFollowingUserRspVO;
-import io.github.zh.userrelation.server.domain.vo.FollowUserReqVO;
-import io.github.zh.userrelation.server.domain.vo.UnfollowUserReqVO;
+import io.github.zh.userrelation.server.domain.vo.*;
 import io.github.zh.userrelation.server.service.RelationService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +44,12 @@ public class RelationController {
     @ApiOperationLog(description = "查询用户关注列表")
     public PageResponse<FindFollowingUserRspVO> findFollowingList(@Validated @RequestBody FindFollowingListReqVO findFollowingListReqVO) {
         return relationService.findFollowingList(findFollowingListReqVO);
+    }
+
+    @PostMapping("/fans/list")
+    @ApiOperationLog(description = "查询用户粉丝列表")
+    public PageResponse<FindFansUserRspVO> findFansList(@Validated @RequestBody FindFansListReqVO findFansListReqVO) {
+        return relationService.findFansList(findFansListReqVO);
     }
 
 }
