@@ -1,6 +1,9 @@
 package io.github.zh.userrelation.server.service;
 
+import io.github.zh.common.resopnse.PageResponse;
 import io.github.zh.common.resopnse.Response;
+import io.github.zh.userrelation.server.domain.vo.FindFollowingListReqVO;
+import io.github.zh.userrelation.server.domain.vo.FindFollowingUserRspVO;
 import io.github.zh.userrelation.server.domain.vo.FollowUserReqVO;
 import io.github.zh.userrelation.server.domain.vo.UnfollowUserReqVO;
 
@@ -25,4 +28,12 @@ public interface RelationService {
      * @return
      */
     Response<?> unfollow(UnfollowUserReqVO unfollowUserReqVO);
+
+    /**
+     * 查询关注列表
+     * @param findFollowingListReqVO
+     * @return
+     */
+    PageResponse<FindFollowingUserRspVO> findFollowingList(FindFollowingListReqVO findFollowingListReqVO);
+
 }
