@@ -2,6 +2,7 @@ package io.github.zh.userrelation.server.service;
 
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.userrelation.server.domain.vo.FollowUserReqVO;
+import io.github.zh.userrelation.server.domain.vo.UnfollowUserReqVO;
 
 /**
  * RelationService
@@ -17,4 +18,11 @@ public interface RelationService {
      * @return
      */
     Response<?> follow(FollowUserReqVO followUserReqVO);
+
+    /**
+     * 取关用户
+     * @param unfollowUserReqVO
+     * @return
+     */
+    Response<?> unfollow(UnfollowUserReqVO unfollowUserReqVO);
 }

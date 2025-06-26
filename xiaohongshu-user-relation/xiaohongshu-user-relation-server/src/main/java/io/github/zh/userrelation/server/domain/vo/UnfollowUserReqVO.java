@@ -1,0 +1,24 @@
+package io.github.zh.userrelation.server.domain.vo;
+
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * UnfollowUserReqVO
+ *
+ * @author 王青玄
+ * @version v0.1 2025-06-26 09:25
+ * @description: 取关用户
+ */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class UnfollowUserReqVO {
+
+    @NotNull(message = "被取关用户 ID 不能为空")
+    private Long unfollowUserId;
+}

@@ -1,6 +1,7 @@
 package io.github.zh.userrelation.server.mapper;
 
 import io.github.zh.userrelation.server.domain.dataobject.FollowingDO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,4 +19,7 @@ public interface FollowingDOMapper {
     int updateByPrimaryKey(FollowingDO record);
 
     List<FollowingDO> selectByUserId(Long userId);
+
+    int deleteByUserIdAndFollowingUserId(@Param("userId") Long userId,
+                                         @Param("unfollowUserId") Long unfollowUserId);
 }

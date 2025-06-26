@@ -3,6 +3,7 @@ package io.github.zh.userrelation.server.controller;
 import io.github.zh.common.resopnse.Response;
 import io.github.zh.log.aspect.ApiOperationLog;
 import io.github.zh.userrelation.server.domain.vo.FollowUserReqVO;
+import io.github.zh.userrelation.server.domain.vo.UnfollowUserReqVO;
 import io.github.zh.userrelation.server.service.RelationService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,12 @@ public class RelationController {
     @ApiOperationLog(description = "关注用户")
     public Response<?> follow(@Validated @RequestBody FollowUserReqVO followUserReqVO) {
         return relationService.follow(followUserReqVO);
+    }
+
+    @PostMapping("/unfollow")
+    @ApiOperationLog(description = "取关用户")
+    public Response<?> unfollow(@Validated @RequestBody UnfollowUserReqVO unfollowUserReqVO) {
+        return relationService.unfollow(unfollowUserReqVO);
     }
 
 }
