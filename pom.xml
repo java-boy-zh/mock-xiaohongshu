@@ -32,6 +32,7 @@
     <module>xiaohongshu-distributed-id</module>
     <module>xiaohongshu-note</module>
     <module>xiaohongshu-user-relation</module>
+      <module>xiaohongshu-count</module>
   </modules>
 
   <properties>
