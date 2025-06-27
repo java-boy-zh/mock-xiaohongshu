@@ -1,6 +1,6 @@
-package io.github.zh.count.server.mapper;
+package io.github.zh.note.server.mapper;
 
-import io.github.zh.count.server.domain.dataobject.NoteCountDO;
+import io.github.zh.note.server.domain.dataobject.NoteCountDO;
 
 public interface NoteCountDOMapper {
     int deleteByPrimaryKey(Long id);
