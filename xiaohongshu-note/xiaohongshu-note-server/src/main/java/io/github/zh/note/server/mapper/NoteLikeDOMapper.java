@@ -28,4 +28,11 @@ public interface NoteLikeDOMapper {
     List<NoteLikeDO> selectLikedByUserIdAndLimit(@Param("userId") Long userId,
                                                  @Param("limit")  int limit);
 
+    /**
+     * 取消点赞
+     * @param noteLikeDO
+     * @return
+     */
+    int update2UnlikeByUserIdAndNoteId(NoteLikeDO noteLikeDO);
+
 }

@@ -1,7 +1,12 @@
 package io.github.zh.note.server.consumer;
 
 import com.google.common.util.concurrent.RateLimiter;
+import io.github.zh.common.util.JsonUtils;
 import io.github.zh.note.server.constant.MQConstants;
+import io.github.zh.note.server.domain.dataobject.NoteLikeDO;
+import io.github.zh.note.server.domain.dto.LikeUnlikeNoteMqDTO;
+import io.github.zh.note.server.mapper.NoteLikeDOMapper;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.spring.annotation.ConsumeMode;
@@ -9,6 +14,7 @@ import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -25,6 +31,9 @@ import java.util.Objects;
 )
 @Slf4j
 public class LikeUnlikeNoteConsumer implements RocketMQListener<Message> {
+
+    @Resource
+    private NoteLikeDOMapper noteLikeDOMapper;
 
     // 每秒创建 5000 个令牌
     private RateLimiter rateLimiter = RateLimiter.create(5000);
@@ -63,6 +72,32 @@ public class LikeUnlikeNoteConsumer implements RocketMQListener<Message> {
      * @param bodyJsonStr
      */
     private void handleUnlikeNoteTagMessage(String bodyJsonStr) {
+        // 消息体 JSON 字符串转 DTO
+        LikeUnlikeNoteMqDTO unlikeNoteMqDTO = JsonUtils.parseObject(bodyJsonStr, LikeUnlikeNoteMqDTO.class);
+
+        if (Objects.isNull(unlikeNoteMqDTO)) return;
+
+        // 用户ID
+        Long userId = unlikeNoteMqDTO.getUserId();
+        // 点赞的笔记ID
+        Long noteId = unlikeNoteMqDTO.getNoteId();
+        // 操作类型
+        Integer type = unlikeNoteMqDTO.getType();
+        // 点赞时间
+        LocalDateTime createTime = unlikeNoteMqDTO.getCreateTime();
+
+        // 构建 DO 对象
+        NoteLikeDO noteLikeDO = NoteLikeDO.builder()
+                .userId(userId)
+                .noteId(noteId)
+                .createTime(createTime)
+                .status(type.byteValue())
+                .build();
+
+        // 取消点赞：记录更新
+        int count = noteLikeDOMapper.update2UnlikeByUserIdAndNoteId(noteLikeDO);
+
+        // TODO: 发送计数 MQ
     }
 
 }
