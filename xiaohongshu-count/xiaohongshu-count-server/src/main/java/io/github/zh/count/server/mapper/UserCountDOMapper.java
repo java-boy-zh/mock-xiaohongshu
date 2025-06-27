@@ -34,5 +34,12 @@ public interface UserCountDOMapper {
     int insertOrUpdateFollowingTotalByUserId(@Param("count") Integer count,
                                              @Param("userId") Long userId);
 
+    /**
+     * 添加笔记计数记录或更新笔记点赞数
+     * @param count
+     * @param noteId
+     * @return
+     */
+    int insertOrUpdateLikeTotalByNoteId(@Param("count") Integer count, @Param("noteId") Long noteId);
 
 }
