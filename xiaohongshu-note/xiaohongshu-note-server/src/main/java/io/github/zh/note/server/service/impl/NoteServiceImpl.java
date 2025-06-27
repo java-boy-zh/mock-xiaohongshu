@@ -15,6 +15,7 @@ import io.github.zh.note.server.constant.MQConstants;
 import io.github.zh.note.server.constant.RedisKeyConstants;
 import io.github.zh.note.server.domain.dataobject.NoteDO;
 import io.github.zh.note.server.domain.dataobject.NoteLikeDO;
+import io.github.zh.note.server.domain.dto.LikeUnlikeNoteMqDTO;
 import io.github.zh.note.server.domain.vo.req.*;
 import io.github.zh.note.server.domain.vo.resp.FindNoteDetailRspVO;
 import io.github.zh.note.server.enums.*;
@@ -764,6 +765,36 @@ public class NoteServiceImpl implements NoteService {
             }
         }
         // 4. 发送 MQ, 将点赞数据落库
+        // 构建消息体 DTO
+        LikeUnlikeNoteMqDTO likeUnlikeNoteMqDTO = LikeUnlikeNoteMqDTO.builder()
+                .userId(userId)
+                .noteId(noteId)
+                .type(LikeUnlikeNoteTypeEnum.LIKE.getCode()) // 点赞笔记
+                .createTime(now)
+                .build();
+
+        // 构建消息对象，并将 DTO 转成 Json 字符串设置到消息体中
+        Message<String> message = MessageBuilder.withPayload(JsonUtils.toJsonString(likeUnlikeNoteMqDTO))
+                .build();
+
+        // 通过冒号连接, 可让 MQ 发送给主题 Topic 时，携带上标签 Tag
+        String destination = MQConstants.TOPIC_LIKE_OR_UNLIKE + ":" + MQConstants.TAG_LIKE;
+
+        String hashKey = String.valueOf(userId);
+
+        // 异步发送 MQ 消息，提升接口响应速度
+        rocketMQTemplate.asyncSendOrderly(destination, message, hashKey, new SendCallback() {
+            @Override
+            public void onSuccess(SendResult sendResult) {
+                log.info("==> 【笔记点赞】MQ 发送成功，SendResult: {}", sendResult);
+            }
+
+            @Override
+            public void onException(Throwable throwable) {
+                log.error("==> 【笔记点赞】MQ 发送异常: ", throwable);
+            }
+        });
+
 
         return Response.success();
     }
