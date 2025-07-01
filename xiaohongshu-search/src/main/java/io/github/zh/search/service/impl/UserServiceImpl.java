@@ -3,6 +3,7 @@ package io.github.zh.search.service.impl;
 import cn.hutool.core.collection.CollectionUtil;
 import com.google.common.collect.Lists;
 import io.github.zh.common.resopnse.PageResponse;
+import io.github.zh.common.util.NumberUtils;
 import io.github.zh.search.domain.vo.req.SearchUserReqVO;
 import io.github.zh.search.domain.vo.resp.SearchUserRspVO;
 import io.github.zh.search.index.UserIndex;
@@ -132,7 +133,7 @@ public class UserServiceImpl implements UserService {
                         .avatar(avatar)
                         .xiaohongshuId(xiaohongshuId)
                         .noteTotal(noteTotal)
-                        .fansTotal(fansTotal)
+                        .fansTotal(NumberUtils.formatNumberString(fansTotal))
                         .highlightNickname(highlightedNickname)
                         .build();
                 searchUserRspVOS.add(searchUserRspVO);
